@@ -1,0 +1,47 @@
+/**
+ * Declare three arrays, left[], right[], and product[]. Do iterations twice. 
+ * First time, traverse from left to right. Calculate each product on the left of the 
+ * exception and store these products to left[]. 
+ * If exception is 0, then left[exception] is 1. Else 
+ * left[exception] is nums[exception - 1] * left[exception - 1].
+ * Second time, traverse from right to left. Calculate each product on the right of the 
+ * exception and store these products to right[]. 
+ * If exception is (size of nums) - 1, then right[exception] is 1. Else 
+ * right[exception] is nums[exception + 1] * right[exception + 1].
+ * Finally multiply left[i] and right[i] and store it to product[i].
+ */
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* productExceptSelf(int* nums, int numsSize, int* returnSize){
+    int* left = (int*) malloc (numsSize * sizeof(int));
+    
+    for(int exception = 0; exception < numsSize; exception++){
+        if(exception == 0){
+            left[exception] = 1;
+        }else{
+            left[exception] = left[exception - 1] * nums[exception - 1];
+        }
+    }
+    
+    int* right = (int*) malloc (numsSize * sizeof(int));
+    
+    for(int exception = numsSize - 1; exception >= 0; exception--){
+        if(exception == numsSize - 1){
+            right[exception] = 1;
+        }else{
+            right[exception] = right[exception + 1] * nums[exception + 1];
+        }
+    }
+    
+    int* product = (int*) malloc (numsSize * sizeof(int));
+    
+    for(int i = 0; i < numsSize; i++){
+        product[i] = left[i] * right[i];
+    }
+    
+    *returnSize = numsSize;
+    return product;
+}
+
