@@ -1,0 +1,29 @@
+/**
+ * Initialize and declare currentSum to be 0 and sum to be minimum integer. 
+ * The returned variable is sum.
+ * Use currentSum to keep track of cumulative sum of sub-array.
+ * 
+ * For each iteration:
+ * Obtain the larger value between nums[i] and currentSum + nums[i].
+ * Obtain the larger value between sum and currentSum.
+ */
+int maxSubArray(int* nums, int numsSize){
+    int currentSum = 0;
+    int sum = INT_MIN;
+    
+    for(int i = 0; i < numsSize; i++){
+        
+        if(nums[i] > currentSum + nums[i]){
+            currentSum = nums[i];
+        }else{
+            currentSum = currentSum + nums[i];
+        }
+        
+        if(sum < currentSum){
+            sum = currentSum;
+        }
+    }
+    
+    return sum;
+}
+

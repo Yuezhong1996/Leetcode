@@ -1,0 +1,36 @@
+
+/**
+ * In a given array nums, keep track of every combination of sub-array in this array.
+ * Use start and end indices as starting and ending points of this sub-array.
+ * Store the product of sub-array subArrayProduct.
+ * End index should be equal to or after(greater than) start index. 
+ * 
+ * For each iteration:
+ * When start and end indices point to the same index(start == end), 
+ * subArrayProduct set to be nums[end].
+ * Else subArrayProduct set to be subArrayProduct *= nums[end] to get cumulative 
+ * product.
+ * Obtain the greater number between product and subArrayProduct
+ * .
+ */ 
+int maxProduct(int* nums, int numsSize){
+    int subArrayProduct = 0;
+    int product = INT_MIN;
+    
+    for(int start = 0; start < numsSize; start++){
+        for(int end = start; end < numsSize; end++){
+            if(start == end){
+                subArrayProduct = nums[end];
+            }else{
+                subArrayProduct *= nums[end];
+            }
+            
+            if(product < subArrayProduct){
+                product = subArrayProduct;
+            }
+        }
+    }
+    
+    return product;
+}
+
